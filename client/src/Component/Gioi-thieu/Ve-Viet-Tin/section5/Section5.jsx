@@ -13,9 +13,9 @@ import "./Section5.css";
 
 // Import assets
 import bgsection2 from "../../../../assets/AboutUs/bgsection2.jpg";
-import Vietnam from "../../../../assets/AboutUs/HSNL/HSNL_2024_VI.jpg";
-import English from "../../../../assets/AboutUs/HSNL/HSNL_2024_EN.jpg";
-import Korea from "../../../../assets/AboutUs/HSNL/HSNL_2024_KO.jpg";
+import Vietnam from "../../../../assets/AboutUs/HSNL/HSNL_2025_VI.png";
+import English from "../../../../assets/AboutUs/HSNL/Company profile bia.png";
+import Korea from "../../../../assets/AboutUs/HSNL/Company profile bia.png";
 
 function Section5() {
   // State to manage language selection
@@ -77,7 +77,7 @@ function Section5() {
           {/* Image based on selected language */}
           {language === "Vietnam" && (
             <Link
-              href="https://publuu.com/flip-book/690701/1536508"
+              href="https://drive.google.com/file/d/1mjfvGmAj3QhZwehK7z9_bAwm04avptFs/view?usp=sharing"
               target="_blank"
             >
               <Image
@@ -89,7 +89,7 @@ function Section5() {
           )}
           {language === "English" && (
             <Link
-              href="https://publuu.com/flip-book/690701/1536510"
+              href="https://drive.google.com/file/d/1gu3rdS6LcZEKzHOYIzZZbumbQlVohvHn/view?usp=sharing"
               target="_blank"
             >
               <Image
@@ -101,7 +101,7 @@ function Section5() {
           )}
           {language === "Korea" && (
             <Link
-              href="https://publuu.com/flip-book/690701/1536513"
+              href="https://drive.google.com/file/d/1gu3rdS6LcZEKzHOYIzZZbumbQlVohvHn/view?usp=sharing"
               target="_blank"
             >
               <Image

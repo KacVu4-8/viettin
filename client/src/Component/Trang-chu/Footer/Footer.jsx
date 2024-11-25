@@ -50,7 +50,7 @@ function Footer() {
                         rel="nofollow"
                         className="font-bold text-[#2c6aff]"
                       >
-                        0983 454 769 <br/> 0901 866 909
+                        0983 454 769 <br /> 0901 866 909
                       </a>
                     </p>
                   </div>
@@ -119,6 +119,20 @@ function Footer() {
                       support@viettinvaluation.com
                     </a>
                   </p>
+                  <span>
+                    <span className="text-red-900 font-bold">
+                      VietTin Valuation is collaborating with{" "}
+                      <a
+                        href="https://global.andersen.com/"
+                        target="_blank"  // Mở liên kết ở cửa sổ mới
+                        rel="noopener noreferrer"  // Cải thiện bảo mật
+                        className="text-red-900 font-bold"  // Thêm style cho liên kết
+                      >
+                        Andersen Global
+                      </a> in Vietnam.
+                    </span>
+                  </span>
+
                 </li>
                 <li className={expandedMenus["mn-01"] ? "expanded" : ""}>
                   <span
@@ -218,6 +232,11 @@ function Footer() {
                         Đào tạo thẩm định
                       </a>
                     </li>
+                    <li className="hover:text-[#2c6aff]">
+                      <a href="/dich-vu-tu-van" title="Dịch vụ tư vấn">
+                        Dịch vụ tư vấn
+                      </a>
+                    </li>
                   </ul>
                 </li>
                 <li className={expandedMenus["mn-03"] ? "expanded" : ""}>
@@ -230,11 +249,6 @@ function Footer() {
                     ></i>
                   </span>
                   <ul id="mn-03" className="flex">
-                    <li className="hover:text-[#2c6aff]">
-                      <a href="/dich-vu-tu-van" title="Dịch vụ tư vấn">
-                        Dịch vụ tư vấn
-                      </a>
-                    </li>
                     <li className="hover:text-[#2c6aff]">
                       <a
                         href="/quy-trinh-tham-dinh"
@@ -259,6 +273,24 @@ function Footer() {
                         title="Quy trình khiếu nại"
                       >
                         Quy trình khiếu nại
+                      </a>
+                    </li>
+                    <li className="hover:text-[#2c6aff] pb-[3rem]">
+                      <a
+                        href="/danh-sach-tham-dinh-vien-ve-gia"
+                        rel="nofollow"
+                        title="Danh sách thẩm định viên về giá"
+                      >
+                        Danh sách thẩm định viên về giá
+                      </a>
+                    </li>
+                    <li className="hover:text-[#2c6aff] pt-5">
+                      <a
+                        href="/bieu-phi-dich-vu-tham-dinh-gia"
+                        rel="nofollow"
+                        title="Biểu phí dịch vụ thẩm định giá"
+                      >
+                        Biểu phí dịch vụ thẩm định giá
                       </a>
                     </li>
                   </ul>
@@ -305,16 +337,9 @@ function Footer() {
                     target="_blank"
                   ></a>
                   <a
-                    className="zmdi zmdi-twitter"
-                    rel="nofollow"
-                    href="#"
-                    title="Twitter Việt Tín"
-                    target="_blank"
-                  ></a>
-                  <a
                     className="zmdi zmdi-linkedin-box"
                     rel="nofollow"
-                    href="https://www.topcv.vn/cong-ty/cong-ty-co-phan-tham-dinh-gia-viet-tin/29124.html"
+                    href="https://www.linkedin.com/company/viettin-valuation/posts/?feedView=all"
                     title="TopCV Việt Tín"
                     target="_blank"
                   ></a>

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./Carousels.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
-
+import Procedure from "../Procedure/Procedure";
 //import assets
 // video
 import section1 from "../../../assets/carousel/section1.mp4";
@@ -23,7 +23,7 @@ import { Parallax, ParallaxBanner } from "react-scroll-parallax";
 function Carousels() {
   //Effect Text _ Section 1
   const [text, setText] = useState("");
-  const fullText = "Nền tảng định giá tự động, nhanh chóng và chính xác";
+  const fullText = "Leading Service Quality";
   const textRef = useRef(null);
   const headingRef = useRef(null);
 
@@ -87,19 +87,6 @@ function Carousels() {
           >
             {text}
           </h1>
-          <p
-            ref={textRef}
-            className="text-base md:text-lg lg:text-xl opacity-0 transition-opacity duration-1000" // Removed 'typing-animation-subtitle'
-            style={{
-              color: "rgba(255, 255, 255, 0.8)", // Slightly transparent white
-              textShadow: "0 0 5px rgba(0, 0, 0, 0.5)", // Subtle text shadow for contrast
-            }}
-          >
-            <span className="company-name">Việt Tín</span> cung cấp dịch vụ thẩm
-            định giá bất động sản cùng nền tảng thẩm định giá tự động, xác định
-            giá trị doanh nghiệp, đào tạo thẩm định giá Online một cách chuyên
-            nghiệp và chất lượng
-          </p>
         </div>
 
         {/* ... Scroll Down ... */}
@@ -115,130 +102,10 @@ function Carousels() {
       </section>
 
       {/* Section 2 hiển thị image giới thiệu */}
-      <section ref={section2Ref} className="relative">
-        <ParallaxBanner
-          layers={[
-            {
-              image: background,
-              speed: -20,
-              scale: [1, 1.6],
-            },
-          ]}
-          style={{
-            aspectRatio: "2/1",
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            zIndex: 0,
-          }}
-        ></ParallaxBanner>
-
-        <div className="flex relative z-10 items-center w-full h-full justify-center p-[10vh_0]">
-          <div className="w-[80%] max-w-[16rem] h-auto">
-            <Image src={image1} alt="Hình ảnh định giá OV" />
-          </div>
-        </div>
-
-        <Parallax speed={10} scale={[0.6, 1.2]}>
-          <div className="relative z-10 flex flex-col items-center w-full h-full p-[5vh_0] text-center">
-            <h1 className="font-['Quicksand'] text-[25px] font-bold">
-              Nền tảng định giá tự động
-            </h1>
-            <h2 className="font-['Quicksand'] text-[25px] font-light text-[#2648b5]">
-              dành cho ngân hàng và doanh nghiệp
-            </h2>
-
-            <p className="font-['Quicksand'] text-[#747576] text-[15px] w-[80%] max-w-[670px] mb-[20px]">
-              Định giá tài sản miễn phí, có kết quả định giá sơ bộ trong vài
-              thao tác, nhận báo cáo định giá trực tiếp, thuận tiện. Viet Tin
-              Valuation giúp các ngân hàng và doanh nghiệp tiết kiệm đến 90%
-              thời gian trong công tác định giá tài sản.
-            </p>
-
-            <Link href="https://onevalue.com.vn/bat-dong-san">
-              <Button
-                endContent={<IoArrowForwardCircleOutline />}
-                radius="lg"
-                className="bg-[#2648b5] text-white mt-4"
-              >
-                Tìm hiểu ngay
-              </Button>
-            </Link>
-          </div>
-        </Parallax>
-
-        <Parallax speed={20}>
-          <div className="flex relative z-10 items-center justify-center p-[5vh_0]">
-            <div className="w-[90%] max-w-[50rem] h-auto">
-              <Image src={image2} alt="Hình ảnh bản đồ dự án OV" />
-            </div>
-          </div>
-        </Parallax>
-
-        <Parallax speed={30} scale={[0.6, 1.2]}>
-          <div className="relative z-10 flex flex-col items-center w-full h-full p-[5vh_0] text-center">
-            <h1 className="font-['Quicksand'] text-[25px] font-bold">
-              Định hình vị trí dự án
-            </h1>
-            <h2 className="font-['Quicksand'] text-[25px] font-light text-[#2648b5]">
-              dành cho các thẩm định viên bất động sản
-            </h2>
-
-            <p className="font-['Quicksand'] text-[#747576] text-[15px] w-[80%] max-w-[670px] mb-[20px]">
-              Xem vị trí cùng thông tin dự án, bản đồ 3D thể hiện chi tiết tòa
-              nhà, giúp thuận tiện định hình tài sản. Tối ưu hóa yếu tố xác thực
-              vị trí dự án của các thẩm định viên bất động sản.
-            </p>
-
-            <Link href="https://onevalue.com.vn/bat-dong-san">
-              <Button
-                endContent={<IoArrowForwardCircleOutline />}
-                radius="lg"
-                className="bg-[#2648b5] text-white mt-4"
-              >
-                Tìm hiểu ngay
-              </Button>
-            </Link>
-          </div>
-        </Parallax>
-
-        <Parallax speed={30}>
-          <div className="flex relative z-10 items-center justify-center pt-[5vh]">
-            <div className="w-[90%] max-w-[26rem] h-auto">
-              <Image src={image3} alt="Hình ảnh thông tin chi tiết dự án OV" />
-            </div>
-          </div>
-        </Parallax>
-
-        <Parallax speed={40} scale={[0.6, 1.2]}>
-          <div className="relative z-10 flex flex-col items-center w-full h-full pt-[5vh] text-center">
-            <h1 className="font-['Quicksand'] text-[25px] font-bold">
-              Cung cấp thông tin chi tiết dự án
-            </h1>
-            <h2 className="font-['Quicksand'] text-[25px] font-light text-[#2648b5]">
-              dành cho các thẩm định viên bất động sản
-            </h2>
-
-            <p className="font-['Quicksand'] text-[#747576] text-[15px] w-[80%] max-w-[670px] mb-[20px]">
-              Xem chi tiết thông tin về dự án, giúp định giá chính xác hơn, giảm
-              thời gian tìm hiểu thông tin dự án, truy cập vào kho dữ liệu bất
-              động sản khổng lồ cùng các thông tin chính xác và hữu ích.
-            </p>
-
-            <Link href="https://onevalue.com.vn/bat-dong-san">
-              <Button
-                endContent={<IoArrowForwardCircleOutline />}
-                radius="lg"
-                className="bg-[#2648b5] text-white mt-4"
-              >
-                Tìm hiểu ngay
-              </Button>
-            </Link>
-          </div>
-        </Parallax>
+      <section
+        ref={section2Ref}
+      >
+       <Procedure />
       </section>
     </div>
   );

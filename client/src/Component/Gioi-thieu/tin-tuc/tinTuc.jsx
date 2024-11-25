@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import Section1 from './Section1/Section1'
 import NavBar from "../../Trang-chu/Navbar/navBar.jsx";
 import LanguageTranslator from "../../Trang-chu/LanguageTranslator/LanguageTranslator";

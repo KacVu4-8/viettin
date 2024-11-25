@@ -83,7 +83,7 @@ function Section2() {
             </div>
 
             {/* Content Display */}
-            <div className="py-[2.5rem] text-center">
+            <div className="py-[2.5rem] pb-20 md:pb-0 text-center">
               <p className="xl:text-lg bg-[#eeeeef] py-4 px-4 rounded-lg lg:text-md md:text-sm">
                 {tabContent[activeTab]}
               </p>

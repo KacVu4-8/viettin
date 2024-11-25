@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { BiSolidReport } from "react-icons/bi";
 import {
   FaBuilding,
@@ -19,6 +19,17 @@ import LanguageTranslator from "../../Trang-chu/LanguageTranslator/LanguageTrans
 import NavBar from "../../Trang-chu/Navbar/navBar.jsx";
 import "./thamdinhBDS.css";
 
+import {
+  Button,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  useDisclosure,
+} from "@nextui-org/react";
+import { IoArrowForwardCircleOutline } from "react-icons/io5";
+
 // import assets
 import bgsection2 from "../../../assets/AboutUs/bgsection2.jpg";
 import bg from "../../../assets/DichVu/ThamdinhBDS/bg_bds.jpg";
@@ -31,6 +42,120 @@ function thamdinhBDS() {
     }
   };
 
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  // Updated formData state to include new fields
+  const [formData, setFormData] = useState({
+    fullName: "", // "Họ và tên"
+    phoneNumber: "", // "Số điện thoại"
+    email: "",
+    requestDetails: "", // "Nội dung yêu cầu"
+  });
+
+  // Handle form input change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const [validationErrors, setValidationErrors] = useState({
+    fullName: "",
+    phoneNumber: "",
+    email: "",
+  });
+
+  // Handle form submission with validation
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Reset validation errors before new submission
+    setValidationErrors({
+      fullName: "",
+      phoneNumber: "",
+      email: "",
+    });
+
+    let isValid = true; // Flag to track overall form validity
+
+    // Check if required fields are filled
+    if (!formData.fullName) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        fullName: "Vui lòng nhập họ và tên",
+      }));
+      isValid = false;
+    }
+
+    // Validate phone number format
+    const phoneNumberRegex = /^\d+$/;
+    if (!formData.phoneNumber) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        phoneNumber: "Vui lòng nhập số điện thoại",
+      }));
+      isValid = false;
+    } else if (!phoneNumberRegex.test(formData.phoneNumber)) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        phoneNumber: "Số điện thoại chỉ được bao gồm các chữ số",
+      }));
+      isValid = false;
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "Vui lòng nhập email",
+      }));
+      isValid = false;
+    } else if (!emailRegex.test(formData.email)) {
+      setValidationErrors((prevErrors) => ({
+        ...prevErrors,
+        email: "Địa chỉ email không hợp lệ",
+      }));
+      isValid = false;
+    }
+
+    if (!isValid) {
+      return; // Stop submission if validation fails
+    }
+
+    try {
+      // Updated API call to save to Google Sheets via Node.js backend
+      const response = await fetch(
+        "https://viettin-server.onrender.com/api/appraisal-request", // Update with your backend API URL
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        alert(
+          "Chúng tôi đã nhận thông tin và liên hệ bạn trong thời gian sớm nhất!"
+        );
+        setFormData({
+          fullName: "",
+          phoneNumber: "",
+          email: "",
+          requestDetails: "",
+        });
+        onOpenChange(); // Close the modal after successful submission
+      } else {
+        alert("Error submitting request.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   return (
     <div>
       <NavBar />
@@ -56,8 +181,8 @@ function thamdinhBDS() {
               </div>
 
               <div>
-                <span className="text-[28px] md:text-[50px] font-extrabold fade-in-slide-up">
-                  THẨM ĐỊNH GIÁ BẤT ĐỘNG SẢN - XÁC ĐỊNH GIÁ TRỊ THỰC
+                <span className="text-[28px] 2xl:text-[55px] md:text-[50px] font-extrabold fade-in-slide-up">
+                  THẨM ĐỊNH GIÁ BẤT ĐỘNG SẢN
                 </span>
               </div>
             </div>
@@ -300,12 +425,82 @@ function thamdinhBDS() {
             </p>
 
             {/* Button with hover effect */}
-            <a
-              href="#contact"
-              className="inline-block px-6 py-2 bg-[#2648b5] text-white text-lg font-semibold rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-xl focus:outline-none"
+            {/* Button with hover effect */}
+            <Button
+              color="primary"
+              endContent={<IoArrowForwardCircleOutline />}
+              className="font-['Quicksand'] mt-4"
+              onClick={onOpen} // Show form on button click
             >
-              Liên hệ ngay
-            </a>
+              Gửi yêu cầu tư vấn
+            </Button>
+
+            {/* The Modal component */}
+            <Modal
+              className="h-[29rem]"
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+            >
+              <ModalContent>
+                {(onClose) => (
+                  <>
+                    <ModalHeader className="font-['Quicksand'] text-xl font-semibold">
+                      Gửi yêu cầu tư vấn
+                    </ModalHeader>
+                    <ModalBody>
+                      <form
+                        onSubmit={handleSubmit}
+                        className="flex flex-col gap-4"
+                      >
+                        <Input
+                          label="Họ và tên *"
+                          fullWidth
+                          required
+                          name="fullName"
+                          value={formData.fullName}
+                          onChange={handleChange}
+                          errorMessage={validationErrors.fullName}
+                        />
+                        <Input
+                          label="Số điện thoại *"
+                          fullWidth
+                          required
+                          name="phoneNumber"
+                          inputMode="numeric"
+                          value={formData.phoneNumber}
+                          onChange={handleChange}
+                          errorMessage={validationErrors.phoneNumber}
+                        />
+                        <Input
+                          label="Email *"
+                          type="email"
+                          fullWidth
+                          required
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          errorMessage={validationErrors.email}
+                        />
+                        <Input
+                          label="Nội dung yêu cầu"
+                          fullWidth
+                          name="requestDetails"
+                          value={formData.requestDetails}
+                          onChange={handleChange}
+                        />
+                        <Button
+                          color="primary"
+                          className="mt-4 font-['Quicksand'] w-full text-bold text-white"
+                          type="submit"
+                        >
+                          Gửi yêu cầu
+                        </Button>
+                      </form>
+                    </ModalBody>
+                  </>
+                )}
+              </ModalContent>
+            </Modal>
           </div>
         </section>
       </div>

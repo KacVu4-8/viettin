@@ -94,8 +94,8 @@ function Section4() {
 
   // Counters for each item
   const branches = useCounter(7, isVisible);
-  const provinces = useCounter(13, isVisible);
-  const staff = useCounter(150, isVisible);
+  const provinces = useCounter(14, isVisible);
+  const staff = useCounter(78, isVisible);
   const projects = useCounter('50.000', isVisible);
   const partners = useCounter(11, isVisible);
 

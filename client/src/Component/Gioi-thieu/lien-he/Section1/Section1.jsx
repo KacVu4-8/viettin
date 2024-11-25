@@ -154,12 +154,7 @@ function Section1() {
 
         <div className="relative z-10 flex justify-start items-center h-full px-8 lg:px-20">
           <div className="text-white max-w-6xl">
-            <div className="flex flex-row gap-1 pb-4 fade-in-animation">
-              <a href="/lien-he" className="font-semibold text-xl lg:text-2xl">
-                <b className="text-blue-200">Liên hệ</b>
-              </a>
-              <i className="zmdi zmdi-chevron-right text-blue-200 font-semibold text-xl lg:text-2xl p-[1px]"></i>
-            </div>
+
 
             <div>
               <span className="text-2xl md:text-4xl lg:text-6xl font-extrabold fade-in-slide-up">

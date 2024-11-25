@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
 import "./navBar.css";
 
 //Import assests
-import logo from "../../../assets/Logo.png";
+import logoviet from "../../../assets/AboutUs/ViettinLogo.png";
 
 //Import Icon
 import { CgMenuGridO } from "react-icons/cg";
@@ -66,10 +66,9 @@ function navBar() {
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         />
         <NavbarBrand>
-          <img src={logo} className="h-[45px] w-[50px]" alt="Logo Viettin" />
-          <p className=" border-r-[1px] pr-1 pt-[14px] border-t-0 border-l-0 border-b-0 border-gray-400 h-12 hover:cursor-pointer font-extrabold text-inherit text-sm text-[#2648b5] hover:text-red-800">
-            <a href="/">VIETTIN VALUATION</a>
-          </p>
+          <a href="/">
+            <img src={logoviet} className="h-full w-full" alt="Logo Viettin" />
+          </a>
         </NavbarBrand>
       </NavbarContent>
 

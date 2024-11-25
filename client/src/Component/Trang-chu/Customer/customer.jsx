@@ -93,7 +93,7 @@ function customer() {
       <section className="relative">
         <div className="container mx-auto py-8">
           <h2 className="font-['Quicksand'] text-2xl font-bold text-center mb-6">
-            Định giá doanh nghiệp
+            Khách hàng Doanh Nghiệp tiêu biểu
           </h2>
           <Slider {...settings}>
             {customersPartners.map((partner, index) => (

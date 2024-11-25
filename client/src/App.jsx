@@ -10,6 +10,14 @@ import VeVietTin from "./Component/Gioi-thieu/Ve-Viet-Tin/VeVietTin.jsx";
 import Career from "./Component/Gioi-thieu/tuyen-dung/tuyenDung.jsx";
 import Tintuc from "./Component/Gioi-thieu/tin-tuc/tinTuc.jsx";
 import Lienhe from "./Component/Gioi-thieu/lien-he/lienHe.jsx";
+import QuytrinhKN from "./Component/Quy-trinh/quyTrinhKhieuNai/quytrinhKN.jsx";
+import QuytrinhTD from "./Component/Quy-trinh/quyTrinhThamDinh/quytrinhTD.jsx";
+import QuytrinhTT from "./Component/Quy-trinh/quyTrinhThanhToan/quytrinhTT.jsx";
+import Dksd from "./Component/Dieu-khoan-su-dung/dksd.jsx";
+import Csbm from "./Component/Chinh-sach-bao-mat/csbm.jsx";
+import TDV from "./Component/Danh-sach-tdv-ve-gia/TDV.jsx";
+import BieuPhi from "./Component/Bieu-phi-dich-vu/BieuPhi.jsx";
+import Section3 from "./Component/Gioi-thieu/tin-tuc/Section3/Section3.jsx";
 
 // Import component dich vu
 import ThamdinhBDS from "./Component/Dich-vu/thamDinhBDS/thamdinhBDS.jsx";
@@ -97,6 +105,70 @@ const router = createBrowserRouter([
     element: (
       <div>
         <DichvuTV />
+      </div>
+    ),
+  },
+  {
+    path: "/quy-trinh-khieu-nai",
+    element: (
+      <div>
+        <QuytrinhKN />
+      </div>
+    ),
+  },
+  {
+    path: "/quy-trinh-tham-dinh",
+    element: (
+      <div>
+        <QuytrinhTD />
+      </div>
+    ),
+  },
+  {
+    path: "/quy-trinh-thanh-toan",
+    element: (
+      <div>
+        <QuytrinhTT />
+      </div>
+    ),
+  },
+  {
+    path: "/dieu-khoan-su-dung",
+    element: (
+      <div>
+        <Dksd />
+      </div>
+    ),
+  },
+  {
+    path: "/chinh-sach-bao-mat",
+    element: (
+      <div>
+        <Csbm />
+      </div>
+    ),
+  },
+  {
+    path: "/danh-sach-tham-dinh-vien-ve-gia",
+    element: (
+      <div>
+        <TDV />
+      </div>
+    ),
+  },
+  {
+    path: "/bieu-phi-dich-vu-tham-dinh-gia",
+    element: (
+      <div>
+        <BieuPhi />
+      </div>
+    ),
+  },
+  {
+    path: "/chi-tiet-tin-tuc",
+    element: (
+      <div>
+        <Section3 />
       </div>
     ),
   },

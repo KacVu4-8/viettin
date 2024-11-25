@@ -13,6 +13,7 @@
     "@clerk/clerk-react": "^5.9.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@ksedline/turnjs": "^0.1.0",
     "@material-tailwind/react": "^2.1.10",
     "@mui/icons-material": "^6.1.1",
     "@mui/material": "^6.1.1",
@@ -36,6 +37,7 @@
     "match-sorter": "^6.3.4",
     "ol": "^10.2.1",
     "papaparse": "^5.4.1",
+    "pdfjs-dist": "^4.7.76",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.4",
     "react-dnd": "^16.0.1",
@@ -53,6 +55,7 @@
     "slick-carousel": "^1.8.1",
     "sort-by": "^0.0.2",
     "styled-components": "^6.1.13",
+    "turn.js": "^1.0.5",
     "tw-elements": "^2.0.0"
   },
   "devDependencies": {

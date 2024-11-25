@@ -145,19 +145,10 @@ function Section() {
 
         <div className="relative z-10 flex justify-start items-center h-full px-8 lg:px-20">
           <div className="text-white max-w-6xl">
-            <div className="flex flex-row gap-1 pb-4 fade-in-animation">
-              <a
-                href="/tuyen-dung"
-                className="font-semibold text-xl lg:text-2xl"
-              >
-                <b className="text-blue-200">TUYỂN DỤNG</b>
-              </a>
-              <i className="zmdi zmdi-chevron-right text-blue-200 font-semibold text-xl lg:text-2xl p-[1px]"></i>
-            </div>
 
             <div>
               <span className="text-2xl md:text-4xl lg:text-6xl font-extrabold fade-in-slide-up">
-                CÙNG VIETTIN VALUATION THAY ĐỔI TƯƠNG LAI
+                TUYỂN DỤNG
               </span>
             </div>
           </div>
@@ -220,7 +211,10 @@ function Section() {
             Cơ cấu tổ chức
           </h2>
           <div>
-            <img src={cocautochuc} className="w-full h-full rounded-xl shadow-lg" />
+            <img
+              src={cocautochuc}
+              className="w-full h-full rounded-xl shadow-lg"
+            />
           </div>
         </div>
       </section>
@@ -228,10 +222,13 @@ function Section() {
       <section className="relative w-full">
         <div className="container mx-auto px-6 lg:px-20">
           <h2 className="text-4xl font-bold text-gray-800 text-center py-10">
-            Lộ trình vòng danh
+            Lộ trình công danh
           </h2>
           <div>
-            <img src={lotrinhvongdanh} className="w-full h-full rounded-xl shadow-lg" />
+            <img
+              src={lotrinhvongdanh}
+              className="w-full h-full rounded-xl shadow-lg"
+            />
           </div>
         </div>
       </section>
