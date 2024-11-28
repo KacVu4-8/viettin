@@ -26,9 +26,10 @@ const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 const auth = new google.auth.JWT(
   process.env.CLIENT_EMAIL,
   null,
-  process.env.PRIVATE_KEY.replace(/\\n/g, "\n"),
+  (process.env.PRIVATE_KEY || "").replace(/\\n/g, "\n"), // Đảm bảo định dạng khóa đúng
   SCOPES
 );
+
 const sheets = google.sheets({ version: "v4", auth });
 const SPREADSHEET_ID = process.env.SHEET_ID;
 
@@ -56,8 +57,6 @@ const sendEmailNotification = (formData) => {
     `,
   };
 
-  // https://docs.google.com/spreadsheets/d/1LgtVuyFPIeKoLPt2pae3Py-bEnzcpOi_/edit?gid=522789202#gid=522789202
-  // https://docs.google.com/spreadsheets/d/1IUQWT6O_6KyZ2VlXPnb1i8iw1tSR9j8UnR0QR5iAvaI/edit?gid=0#gid=0
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
