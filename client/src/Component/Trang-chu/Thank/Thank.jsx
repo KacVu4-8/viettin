@@ -104,7 +104,7 @@ function Thank() {
       // Updated API call to save to Google Sheets via Node.js backend
       const response = await fetch(
         // "https://viettin-be.onrender.com/api/appraisal-request", // Update with your backend API URL
-        "https://viettin-server-uzq2.onrender.com/api/send-request", // Update with your backend API URL
+        "https://viettin-server-uzq2.onrender.com/api/appraisal-request", // Update with your backend API URL
         {
           method: "POST",
           headers: {

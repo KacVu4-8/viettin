@@ -122,7 +122,7 @@ const sendEmailNotification = (formData) => {
 //   }
 // });
 
-app.post("/api/send-request", async (req, res) => {
+app.post("/api/appraisal-request", async (req, res) => {
   const formData = req.body;
   console.log(formData)
 
