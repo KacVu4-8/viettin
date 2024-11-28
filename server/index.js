@@ -430,7 +430,7 @@ const sendEmailNotification = async (formData) => {
 };
 
 // API endpoint
-app.post("/api/appraisal-request", async (req, res) => {
+app.post("/api/appraisal-request", async (req, res) => { // appraisal-request
   const { fullName, email, phoneNumber, requestDetails } = req.body;
 
   if (!fullName || !email || !phoneNumber) {
