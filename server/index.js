@@ -456,6 +456,17 @@ app.post("/api/appraisal-request", async (req, res) => { // appraisal-request
   }
 });
 
+app.post('/api/appraisal-request-1', (req, res) => {
+  const data = req.body; // Lấy dữ liệu từ client
+  console.log('Received request:', data);
+
+  // Thực hiện xử lý dữ liệu
+  const response = { message: 'Request received', data };
+
+  // Trả kết quả về client
+  res.status(200).json(response);
+});
+
 // Ping server to prevent sleep
 cron.schedule("*/15 * * * *", () => {
   const url = process.env.PING_URL;
