@@ -70,48 +70,52 @@ const sendEmailNotification = (formData) => {
 
 
 
-app.post("/api/appraisal-request", async (req, res) => {
+// app.post("/api/appraisal-request", async (req, res) => {
+//   const { fullName, email, phoneNumber, requestDetails } = req.body;
+
+//   try {
+//     const request = {
+//       spreadsheetId: SPREADSHEET_ID,
+//       range: "Sheet1!A:D",
+//       valueInputOption: "RAW",
+//       insertDataOption: "INSERT_ROWS",
+//       resource: {
+//         values: [[fullName, phoneNumber, email, requestDetails]],
+//       },
+//     };
+
+//     await sheets.spreadsheets.values.append(request);
+//     sendEmailNotification({ fullName, phoneNumber, email, requestDetails });
+
+//     res.status(200).json({
+//       message: "Request saved successfully and email notification sent.",
+//     });
+//   } catch (error) {
+//     console.error("Error:", error);
+//     res.status(500).json({
+//       message: "Internal Server Error",
+//       error: error.message,
+//     });
+//   }
+// });
+
+app.post("/api/appraisal-request", (req, res) => {
   const { fullName, email, phoneNumber, requestDetails } = req.body;
 
-  try {
-    const request = {
-      spreadsheetId: SPREADSHEET_ID,
-      range: "Sheet1!A:D",
-      valueInputOption: "RAW",
-      insertDataOption: "INSERT_ROWS",
-      resource: {
-        values: [[fullName, phoneNumber, email, requestDetails]],
-      },
-    };
-
-    await sheets.spreadsheets.values.append(request);
-    sendEmailNotification({ fullName, phoneNumber, email, requestDetails });
-
-    res.status(200).json({
-      message: "Request saved successfully and email notification sent.",
-    });
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({
-      message: "Internal Server Error",
-      error: error.message,
-    });
-  }
-});
-
-app.post("/api/test", (req, res) => {
-  // Kiểm tra dữ liệu trong body của yêu cầu (nếu có)
-  const { name } = req.body;
-  if (name) {
-    return res.status(200).json({
-      message: `Tôi thành công, ${name}!`,
+  // Kiểm tra xem các tham số có được cung cấp không
+  if (!fullName || !email || !phoneNumber || !requestDetails) {
+    return res.status(400).json({
+      message: "Vui lòng cung cấp đầy đủ thông tin yêu cầu!",
     });
   }
 
+
+  // Nếu các tham số đầy đủ, trả về thông báo thành công
   return res.status(200).json({
-    message: "Tôi thành công",
+    message: `Yêu cầu của bạn đã được ghi nhận thành công!`,
   });
 });
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
