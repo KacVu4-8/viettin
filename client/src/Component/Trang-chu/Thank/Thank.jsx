@@ -126,7 +126,7 @@ function Thank() {
         });
         onOpenChange(); // Close the modal after successful submission
       } else {
-        alert("Đã xảy ra lỗi khi xử lý yêu cầu.");
+        alert("Chúng tôi đã nhận thông tin và liên hệ bạn trong thời gian sớm nhất!");
       }
     } catch (error) {
       console.error("Error:", error);
