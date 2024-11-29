@@ -169,10 +169,9 @@ const SCOPES = ["https://www.googleapis.com/auth/spreadsheets"];
 const auth = new google.auth.JWT(
   process.env.CLIENT_EMAIL,
   null,
-  process.env.PRIVATE_KEY.replace(/\\n/g, "\n"), // Xử lý đúng các ký tự dòng mới trong khóa riêng
+  (process.env.PRIVATE_KEY || "").replace(/\\n/g, "\n"), // Đảm bảo định dạng khóa đúng
   SCOPES
 );
-
 
 const sheets = google.sheets({ version: "v4", auth });
 const SPREADSHEET_ID = process.env.SHEET_ID;
@@ -189,10 +188,10 @@ const transporter = nodemailer.createTransport({
 const sendEmailNotification = (formData) => {
   const mailOptions = {
     from: process.env.EMAIL_USER,
-    to: "khacvu908@gmail.com", // Địa chỉ email nhận thông báo
+    to: "support@viettinvaluation.com", // Địa chỉ email nhận thông báo
     subject: "Yêu cầu sử dụng dịch vụ Việt Tín",
     text: `
-      Có một yêu cầu sử dụng dịch vụ mới được ghi nhận tại sheet: https://docs.google.com/spreadsheets/d/1LgtVuyFPIeKoLPt2pae3Py-bEnzcpOi_/edit?gid=522789202#gid=522789202
+      Có một yêu cầu sử dụng dịch vụ mới được ghi nhận tại sheet: https://docs.google.com/spreadsheets/d/1LgtVuyFPIeKoLPt2pae3Py-bEnzcpOi_/edit?gid=0#gid=0
 
       Full Name: ${formData.fullName}
       Phone Number: ${formData.phoneNumber}
@@ -247,6 +246,51 @@ app.post("/api/appraisal-request", (req, res) => {
     });
   });
 });
+
+// app.post("/api/appraisal-request", async (req, res) => {
+//   const { fullName, email, phoneNumber, requestDetails } = req.body;
+
+//   // Kiểm tra thông tin đầu vào
+//   if (!fullName || !email || !phoneNumber || !requestDetails) {
+//     return res.status(400).json({
+//       message: "Vui lòng cung cấp đầy đủ thông tin yêu cầu!",
+//     });
+//   }
+
+//   try {
+//     // Thêm dữ liệu vào Google Sheets
+//     await sheets.spreadsheets.values.append({
+//       spreadsheetId: SPREADSHEET_ID,
+//       range: "Sheet1!A:D", // Phạm vi cần ghi dữ liệu
+//       valueInputOption: "RAW",
+//       insertDataOption: "INSERT_ROWS",
+//       resource: {
+//         values: [
+//           [
+//             new Date().toLocaleString("vi-VN"), // Ngày giờ hiện tại
+//             fullName,
+//             phoneNumber,
+//             email,
+//             requestDetails,
+//           ],
+//         ],
+//       },
+//     });
+
+//     // Gửi email thông báo
+//     sendEmailNotification({ fullName, email, phoneNumber, requestDetails });
+
+//     return res.status(200).json({
+//       message: "Yêu cầu của bạn đã được ghi nhận và lưu vào Google Sheets thành công!",
+//     });
+//   } catch (error) {
+//     console.error("Lỗi khi lưu dữ liệu vào Google Sheets:", error);
+//     return res.status(500).json({
+//       message: "Có lỗi xảy ra khi lưu dữ liệu vào Google Sheets.",
+//     });
+//   }
+// });
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
