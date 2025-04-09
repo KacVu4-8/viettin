@@ -21,16 +21,21 @@ function Section3() {
   const location = useLocation();
   const [article, setArticle] = useState(null);
 
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
-  // Updated formData state to include new fields
   const [formData, setFormData] = useState({
-    fullName: "", // "Họ và tên"
-    phoneNumber: "", // "Số điện thoại"
+    fullName: "",
+    phoneNumber: "",
+    email: "",
+    requestDetails: "",
+  });
+
+  const [validationErrors, setValidationErrors] = useState({
+    fullName: "",
+    phoneNumber: "",
     email: "",
   });
 
-  // Handle form input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -39,76 +44,62 @@ function Section3() {
     });
   };
 
-  const [validationErrors, setValidationErrors] = useState({
-    fullName: "",
-    phoneNumber: "",
-    email: "",
-  });
-
-  // Handle form submission with validation
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Reset validation errors before new submission
+    window.open(article.link, "_blank");
+
     setValidationErrors({
       fullName: "",
       phoneNumber: "",
       email: "",
     });
 
-    window.open(article.link, "_blank");
+    let isValid = true;
 
-    let isValid = true; // Flag to track overall form validity
-
-    // Check if required fields are filled
     if (!formData.fullName) {
-      setValidationErrors((prevErrors) => ({
-        ...prevErrors,
+      setValidationErrors((prev) => ({
+        ...prev,
         fullName: "Vui lòng nhập họ và tên",
       }));
       isValid = false;
     }
 
-    // Validate phone number format
     const phoneNumberRegex = /^\d+$/;
     if (!formData.phoneNumber) {
-      setValidationErrors((prevErrors) => ({
-        ...prevErrors,
+      setValidationErrors((prev) => ({
+        ...prev,
         phoneNumber: "Vui lòng nhập số điện thoại",
       }));
       isValid = false;
     } else if (!phoneNumberRegex.test(formData.phoneNumber)) {
-      setValidationErrors((prevErrors) => ({
-        ...prevErrors,
+      setValidationErrors((prev) => ({
+        ...prev,
         phoneNumber: "Số điện thoại chỉ được bao gồm các chữ số",
       }));
       isValid = false;
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email) {
-      setValidationErrors((prevErrors) => ({
-        ...prevErrors,
+      setValidationErrors((prev) => ({
+        ...prev,
         email: "Vui lòng nhập email",
       }));
       isValid = false;
     } else if (!emailRegex.test(formData.email)) {
-      setValidationErrors((prevErrors) => ({
-        ...prevErrors,
+      setValidationErrors((prev) => ({
+        ...prev,
         email: "Địa chỉ email không hợp lệ",
       }));
       isValid = false;
     }
 
-    if (!isValid) {
-      return; // Stop submission if validation fails
-    }
+    if (!isValid) return;
 
     try {
-      // Updated API call to save to Google Sheets via Node.js backend
       const response = await fetch(
-        "https://viettin-server-uzq2.onrender.com/api/appraisal-request", // Update with your backend API URL
+        "https://viettin-server-uzq2.onrender.com/api/appraisal-request",
         {
           method: "POST",
           headers: {
@@ -120,41 +111,35 @@ function Section3() {
 
       if (response.ok) {
         alert(
-          "Chúng tôi đã nhận thông tin và liên hệ bạn trong thời gian sớm nhất!"
+          "Chúng tôi đã nhận thông tin và sẽ liên hệ bạn trong thời gian sớm nhất!"
         );
         setFormData({
           fullName: "",
           phoneNumber: "",
           email: "",
+          requestDetails: "",
         });
-        onOpenChange(); // Close the modal after successful submission
+        onClose();
       } else {
         alert(
-          "Chúng tôi đã nhận thông tin và liên hệ bạn trong thời gian sớm nhất!"
+          "Chúng tôi đã nhận thông tin và sẽ liên hệ bạn trong thời gian sớm nhất!"
         );
       }
     } catch (error) {
       console.error("Error:", error);
+      alert("Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.");
     }
   };
 
   useEffect(() => {
-    // Cuộn lên đầu trang khi render
     window.scrollTo(0, 0);
-
-    // Truy xuất bài viết từ URL
     const pathSegments = location.pathname.split("/tin-tuc/");
-
-    // Lấy slug từ URL
     const slugFromUrl = decodeURIComponent(pathSegments[1]);
-
-    // Tìm bài viết khớp với slug
     const matchedArticle = articles.find(
       (item) => `${removeVietnameseTones(item.description)}` === slugFromUrl
     );
 
     if (matchedArticle) {
-      console.log("✅ Bài viết tìm thấy:", matchedArticle);
       setArticle(matchedArticle);
     } else {
       console.warn("⚠️ Không tìm thấy bài viết phù hợp!");
@@ -233,18 +218,19 @@ function Section3() {
                 color="primary"
                 endContent={<IoArrowForwardCircleOutline />}
                 className="font-['Quicksand'] mt-4"
-                onClick={onOpen} // Show form on button click
+                onClick={onOpen}
               >
                 Tải file đính kèm
               </Button>
 
               <Modal
-                className="max-h-[90vh]"
                 isOpen={isOpen}
                 onOpenChange={onOpenChange}
+                onClose={onClose}
+                className="max-h-[90vh] overflow-y-auto"
               >
                 <ModalContent>
-                  {(onClose) => (
+                  {() => (
                     <>
                       <ModalHeader className="font-['Quicksand'] text-xl font-semibold">
                         Nhập thông tin để tải file
@@ -257,7 +243,6 @@ function Section3() {
                           <Input
                             label="Họ và tên *"
                             fullWidth
-                            required
                             name="fullName"
                             value={formData.fullName}
                             onChange={handleChange}
@@ -266,7 +251,6 @@ function Section3() {
                           <Input
                             label="Số điện thoại *"
                             fullWidth
-                            required
                             name="phoneNumber"
                             inputMode="numeric"
                             value={formData.phoneNumber}
@@ -277,17 +261,22 @@ function Section3() {
                             label="Email *"
                             type="email"
                             fullWidth
-                            required
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
                             errorMessage={validationErrors.email}
                           />
+                          <Input
+                            label="Nội dung yêu cầu"
+                            fullWidth
+                            name="requestDetails"
+                            value={formData.requestDetails}
+                            onChange={handleChange}
+                          />
                           <Button
                             color="primary"
                             className="mt-4 font-['Quicksand'] w-full text-bold text-white"
                             type="submit"
-                            target="_blank"
                           >
                             Gửi & Tải file
                           </Button>
@@ -307,7 +296,6 @@ function Section3() {
               {article.linktext}
             </a>
           )}
-
           <br />
           <a
             href={article.link1}
