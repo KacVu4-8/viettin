@@ -26,17 +26,15 @@ function Section1() {
       section2Ref.current.scrollIntoView({ behavior: "smooth" });
     }
   };
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
-  // Updated formData state to include new fields
   const [formData, setFormData] = useState({
-    fullName: "", // "Họ và tên"
-    phoneNumber: "", // "Số điện thoại"
+    fullName: "",
+    phoneNumber: "",
     email: "",
-    requestDetails: "", // "Nội dung yêu cầu"
+    requestDetails: "",
   });
 
-  // Handle form input change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -51,63 +49,56 @@ function Section1() {
     email: "",
   });
 
-  // Handle form submission with validation
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Reset validation errors before new submission
     setValidationErrors({
       fullName: "",
       phoneNumber: "",
       email: "",
     });
 
-    let isValid = true; // Flag to track overall form validity
+    let isValid = true;
 
-    // Check if required fields are filled
     if (!formData.fullName) {
-      setValidationErrors((prevErrors) => ({
-        ...prevErrors,
+      setValidationErrors((prev) => ({
+        ...prev,
         fullName: "Vui lòng nhập họ và tên",
       }));
       isValid = false;
     }
 
-    // Validate phone number format
     const phoneNumberRegex = /^\d+$/;
     if (!formData.phoneNumber) {
-      setValidationErrors((prevErrors) => ({
-        ...prevErrors,
+      setValidationErrors((prev) => ({
+        ...prev,
         phoneNumber: "Vui lòng nhập số điện thoại",
       }));
       isValid = false;
     } else if (!phoneNumberRegex.test(formData.phoneNumber)) {
-      setValidationErrors((prevErrors) => ({
-        ...prevErrors,
+      setValidationErrors((prev) => ({
+        ...prev,
         phoneNumber: "Số điện thoại chỉ được bao gồm các chữ số",
       }));
       isValid = false;
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email) {
-      setValidationErrors((prevErrors) => ({
-        ...prevErrors,
+      setValidationErrors((prev) => ({
+        ...prev,
         email: "Vui lòng nhập email",
       }));
       isValid = false;
     } else if (!emailRegex.test(formData.email)) {
-      setValidationErrors((prevErrors) => ({
-        ...prevErrors,
+      setValidationErrors((prev) => ({
+        ...prev,
         email: "Địa chỉ email không hợp lệ",
       }));
       isValid = false;
     }
 
-    if (!isValid) {
-      return; // Stop submission if validation fails
-    }
+    if (!isValid) return;
 
     try {
       const response = await fetch(
@@ -123,7 +114,7 @@ function Section1() {
 
       if (response.ok) {
         alert(
-          "Chúng tôi đã nhận thông tin và liên hệ bạn trong thời gian sớm nhất!"
+          "Chúng tôi đã nhận thông tin và sẽ liên hệ bạn trong thời gian sớm nhất!"
         );
         setFormData({
           fullName: "",
@@ -131,14 +122,15 @@ function Section1() {
           email: "",
           requestDetails: "",
         });
-        onOpenChange(); // Close the modal after successful submission
+        onClose();
       } else {
         alert(
-          "Chúng tôi đã nhận thông tin và liên hệ bạn trong thời gian sớm nhất!"
+          "Chúng tôi đã nhận thông tin và sẽ liên hệ bạn trong thời gian sớm nhất!"
         );
       }
     } catch (error) {
       console.error("Error:", error);
+      alert("Đã xảy ra lỗi khi gửi yêu cầu. Vui lòng thử lại.");
     }
   };
   return (
@@ -164,32 +156,32 @@ function Section1() {
             <Button
               color="primary"
               endContent={<IoArrowForwardCircleOutline />}
-              className="font-['Quicksand'] mt-4 text-md focus:outline-none"
-              onClick={onOpen} // Show form on button click
+              className="font-['Quicksand'] mt-4"
+              onClick={onOpen}
             >
-              Gửi yêu cầu
+              Gửi yêu cầu thẩm định giá
             </Button>
 
             <Modal
-              className="h-[29rem]"
               isOpen={isOpen}
               onOpenChange={onOpenChange}
+              onClose={onClose}
+              className="max-h-[90vh] overflow-y-auto"
             >
               <ModalContent>
-                {(onClose) => (
+                {() => (
                   <>
-                    <ModalHeader className="font-['Quicksand'] border-b-[0.2px] border-solid border-gray-400 text-xl font-semibold">
-                      Nhập thông tin để tải file
+                    <ModalHeader className="font-['Quicksand'] text-xl font-semibold">
+                      Gửi yêu cầu thẩm định giá
                     </ModalHeader>
                     <ModalBody>
                       <form
                         onSubmit={handleSubmit}
-                        className="flex flex-col pt-2 gap-4"
+                        className="flex flex-col gap-4"
                       >
                         <Input
                           label="Họ và tên *"
                           fullWidth
-                          required
                           name="fullName"
                           value={formData.fullName}
                           onChange={handleChange}
@@ -198,7 +190,6 @@ function Section1() {
                         <Input
                           label="Số điện thoại *"
                           fullWidth
-                          required
                           name="phoneNumber"
                           inputMode="numeric"
                           value={formData.phoneNumber}
@@ -209,7 +200,6 @@ function Section1() {
                           label="Email *"
                           type="email"
                           fullWidth
-                          required
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
