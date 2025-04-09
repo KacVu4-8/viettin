@@ -45,7 +45,7 @@ const transporter = nodemailer.createTransport({
 const sendEmailNotification = (formData) => {
   const mailOptions = {
     from: process.env.EMAIL_USER,
-    to: "support@viettinvaluation.com", // Địa chỉ email nhận thông báo
+    to: "khacvu908@gmail.com", // Địa chỉ email nhận thông báo
     subject: "Yêu cầu sử dụng dịch vụ Việt Tín",
     text: `
       Full Name: ${formData.fullName}
