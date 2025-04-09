@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import "./Section1.css";
@@ -111,7 +111,7 @@ function Section1() {
 
     try {
       const response = await fetch(
-        "https://viettin-be.onrender.com/api/appraisal-request",
+        "https://viettin-server-uzq2.onrender.com/api/appraisal-request",
         {
           method: "POST",
           headers: {
@@ -133,7 +133,9 @@ function Section1() {
         });
         onOpenChange(); // Close the modal after successful submission
       } else {
-        alert("Error submitting request.");
+        alert(
+          "Chúng tôi đã nhận thông tin và liên hệ bạn trong thời gian sớm nhất!"
+        );
       }
     } catch (error) {
       console.error("Error:", error);
@@ -154,8 +156,6 @@ function Section1() {
 
         <div className="relative z-10 flex justify-start items-center h-full px-8 lg:px-20">
           <div className="text-white max-w-6xl">
-
-
             <div>
               <span className="text-2xl md:text-4xl lg:text-6xl font-extrabold fade-in-slide-up">
                 Liên hệ với chúng tôi
@@ -179,7 +179,7 @@ function Section1() {
                 {(onClose) => (
                   <>
                     <ModalHeader className="font-['Quicksand'] border-b-[0.2px] border-solid border-gray-400 text-xl font-semibold">
-                      Liên hệ với Việt Tín
+                      Nhập thông tin để tải file
                     </ModalHeader>
                     <ModalBody>
                       <form

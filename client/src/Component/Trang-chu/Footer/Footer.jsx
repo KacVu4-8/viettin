@@ -26,31 +26,14 @@ function Footer() {
                     <i className="zmdi zmdi-phone"></i>
                   </div>
                   <div className="detail">
-                    <p className="title">Gọi ngay từ 8:00 đến 18:00</p>
-                    <p className="link">
-                      <a
-                        href="tel:0901 866 906"
-                        className="font-bold text-[#2c6aff]"
-                        rel="nofollow"
-                      >
-                        0901 866 906/907
-                      </a>
-                    </p>
-                  </div>
-                </li>
-                <li className="item">
-                  <div className="icon">
-                    <i className="zmdi zmdi-phone"></i>
-                  </div>
-                  <div className="detail">
                     <p className="title">Hotline</p>
                     <p className="link">
                       <a
-                        href="tel:0983454769"
+                        href="tel:0901866909"
                         rel="nofollow"
                         className="font-bold text-[#2c6aff]"
                       >
-                        0983 454 769 <br /> 0901 866 909
+                        0901 866 909 <a href="tel:0901866909" className="font-bold text-[#2c6aff]">(Hồ sơ tư vấn giá trị doanh nghiệp)</a>  <br /> 0939 645 986 <a href="0939 645 986" className="font-bold text-[#2c6aff]">(Hồ sơ khác: Bất động sản, Động sản, Dự án, ...)</a> 
                       </a>
                     </p>
                   </div>
@@ -100,7 +83,7 @@ function Footer() {
                     <i className="zmdi zmdi-pin-drop"></i>Tòa nhà TSA, tầng 5,
                     số 43 Nguyễn Sơn Hà, Phường 5, Quận 3, TP.HCM
                   </p>
-                  <p>
+                  {/* <p>
                     <i className="zmdi zmdi-phone"></i>
                     <a href="tel:0901866906" rel="nofollow">
                       0901 866 906/907/909
@@ -109,7 +92,7 @@ function Footer() {
                     <a href="tel:0983454769" rel="nofollow">
                       0983 454 769
                     </a>
-                  </p>
+                  </p> */}
                   <p>
                     <i className="zmdi zmdi-email"></i>
                     <a

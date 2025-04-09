@@ -17,7 +17,7 @@ import Dksd from "./Component/Dieu-khoan-su-dung/dksd.jsx";
 import Csbm from "./Component/Chinh-sach-bao-mat/csbm.jsx";
 import TDV from "./Component/Danh-sach-tdv-ve-gia/TDV.jsx";
 import BieuPhi from "./Component/Bieu-phi-dich-vu/BieuPhi.jsx";
-import Section3 from "./Component/Gioi-thieu/tin-tuc/Section3/Section3.jsx";
+
 
 // Import component dich vu
 import ThamdinhBDS from "./Component/Dich-vu/thamDinhBDS/thamdinhBDS.jsx";
@@ -25,6 +25,8 @@ import ThamdinhDS from "./Component/Dich-vu/thamDinhDS/thamdinhDS.jsx";
 import ThamdinhDN from "./Component/Dich-vu/thamDinhDN/thamdinhDN.jsx";
 import ThamdinhDT from "./Component/Dich-vu/thamDinhDT/thamdinhDT.jsx";
 import DichvuTV from "./Component/Dich-vu/dichVuTV/dichvuTV.jsx";
+import Section3 from "./Component/Gioi-thieu/tin-tuc/Section3/Section3.jsx";
+
 
 //Create Router
 const router = createBrowserRouter([
@@ -165,12 +167,13 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/chi-tiet-tin-tuc",
+    path: "/tin-tuc/:description",
     element: (
       <div>
-        <Section3 />
+        <Section3 />,
       </div>
-    ),
+    )
+    
   },
 ]);
 

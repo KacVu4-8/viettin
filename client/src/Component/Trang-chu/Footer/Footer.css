@@ -127,7 +127,7 @@ footer {
 }
 
 #footer .inner .row .contact-group .item {
-  width: 20%;
+  width: 50%;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
@@ -371,7 +371,7 @@ a {
   }
 
   #footer .inner .row .contact-group .item {
-    width: 50%; /* Two items per row */
+    width: 100%; /* Two items per row */
     margin-bottom: 15px;
   }
 
@@ -399,7 +399,7 @@ a {
   }
 
   #footer .inner .row .contact-group .item {
-    width: 50%; /* Two items per row */
+    width: 100%; /* Two items per row */
     margin-bottom: 15px;
   }
 
